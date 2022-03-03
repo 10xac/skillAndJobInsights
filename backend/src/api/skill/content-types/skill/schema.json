@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skills",
+  "info": {
+    "singularName": "skill",
+    "pluralName": "skills",
+    "displayName": "skill",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "data_graph": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::data-graph.data-graph",
+      "inversedBy": "skill"
+    },
+    "Definition": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

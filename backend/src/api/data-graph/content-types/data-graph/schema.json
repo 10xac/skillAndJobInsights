@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "data_graphs",
+  "info": {
+    "singularName": "data-graph",
+    "pluralName": "data-graphs",
+    "displayName": "data-graph",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "graphData": {
+      "type": "json",
+      "required": true
+    },
+    "skill": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::skill.skill",
+      "mappedBy": "data_graph"
+    }
+  }
+}
