@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "demands",
+  "info": {
+    "singularName": "demand",
+    "pluralName": "demands",
+    "displayName": "demand"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "data": {
+      "type": "json",
+      "required": true
+    },
+    "skill": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::skill.skill",
+      "inversedBy": "demand"
+    }
+  }
+}

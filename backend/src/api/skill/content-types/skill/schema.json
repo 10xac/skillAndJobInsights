@@ -25,6 +25,18 @@
     "Definition": {
       "type": "text",
       "required": true
+    },
+    "demand": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::demand.demand",
+      "inversedBy": "skill"
+    },
+    "related_skill": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::related-skill.related-skill",
+      "inversedBy": "skill"
     }
   }
 }

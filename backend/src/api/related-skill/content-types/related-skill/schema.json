@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "related_skills",
+  "info": {
+    "singularName": "related-skill",
+    "pluralName": "related-skills",
+    "displayName": "RelatedSkill"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "relation": {
+      "type": "json",
+      "required": true
+    },
+    "skill": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::skill.skill",
+      "inversedBy": "related_skill"
+    }
+  }
+}
