@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SiteHeader from "./components/SiteHeader";
+import BatchSummary from "./pages/BatchSummary";
 import Competency from "./pages/Competency";
 import Insights from "./pages/Insights";
 //page and layout imports
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/" element={<Skills />} />
             <Route path="/insight/:id" element={<Insights />} />
             <Route path="/competency" element={<Competency />} />
+            <Route path="/batch" element={<BatchSummary />} />
           </Routes>
         </div>
       </ApolloProvider>
