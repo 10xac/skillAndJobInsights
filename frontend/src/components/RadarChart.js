@@ -402,7 +402,9 @@ function valueLabelFormat(value) {
 
 export default function RadarChart() {
   const [week, setWeek] = useState(abrhamComp.length - 1);
-  const [selected, setSelected] = useState("Cumulative");
+  const [selected, setSelected] = useState({
+    id: "Cumulative",
+  });
   const categories = [];
   const series = [];
   const colors = [];
@@ -473,16 +475,16 @@ export default function RadarChart() {
   };
   let seriesData = [];
   let max;
-  if (selected === "Cumulative") {
+  if (selected.id === "Cumulative") {
     seriesData = [{ name: "Cumulative", data: chartData.series }];
     max = data.length - 1;
-  } else if (selected === "Batch average") {
+  } else if (selected.id === "Batch average") {
     seriesData = [{ name: "Batch average", data: chartData.average }];
     max = 1;
-  } else if (selected === "Week performance") {
+  } else if (selected.id === "Week performance") {
     seriesData = [{ name: "Weekly  Competency", data: chartData.weekValue }];
     max = 1;
-  } else if (selected === "Weekly with Average") {
+  } else if (selected.id === "Weekly with Average") {
     seriesData = [
       { name: "Weekly  Competency", data: chartData.weekValue },
       { name: "Batch average", data: chartData.average },

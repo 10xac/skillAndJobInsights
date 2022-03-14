@@ -2,15 +2,11 @@ import { Box, TextField } from "@material-ui/core";
 import { Autocomplete } from "@mui/material";
 const opt = [
   {
-    id: 1,
-    label: "Cumulative",
-    id: 2,
-    label: "Batch average",
-    id: 3,
-    label: "Week performance",
-    id: 4,
-    label: "Weekly with Average",
+    id: "Cumulative",
   },
+  { id: "Batch average" },
+  { id: "Week performance" },
+  { id: "Weekly with Average" },
 ];
 
 export default function AutoComplete({ selected, setSelected }) {
@@ -26,10 +22,10 @@ export default function AutoComplete({ selected, setSelected }) {
       autoHighlight
       id="combo-box-demo"
       sx={{ width: 300 }}
-      getOptionLabel={(option) => option.label}
+      getOptionLabel={(option) => option.id}
       renderOption={(props, option) => (
         <Box component="li" {...props}>
-          {option.label}
+          {option.id}
         </Box>
       )}
       renderInput={(params) => (
