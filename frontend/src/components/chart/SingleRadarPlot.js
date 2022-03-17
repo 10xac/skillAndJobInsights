@@ -42,7 +42,7 @@ export default function SingleRadarPlot({ data }) {
       max: 100 * data.max,
     },
     fill: {
-      opacity: 0.7,
+      opacity: 0.6,
       type: "solid",
       colors: data.fillColors,
     },

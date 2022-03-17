@@ -76,6 +76,7 @@ export default function BatchSummary() {
     colors: chartData.colors,
     fillColors: chartData.fillColors,
     max: weekSummary.length - 1,
+    markC: [],
   };
 
   return (
