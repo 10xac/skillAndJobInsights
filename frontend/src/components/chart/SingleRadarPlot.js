@@ -2,10 +2,9 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 export default function SingleRadarPlot({ data }) {
-  // console.log(data);
+  console.log(data);
   const options: ApexOptions = {
     series: data.series,
-
     chart: {
       toolbar: {
         show: true,
@@ -43,13 +42,12 @@ export default function SingleRadarPlot({ data }) {
       max: 100 * data.max,
     },
     fill: {
-      opacity: 0.3,
-      // type: "solid",
-      // colors: data.fillColors,
+      opacity: 0.5,
+      type: "solid",
+      colors: data.fillColors,
     },
     markers: {
-      //size: 4,
-      //colors: data.fillColors,
+      discrete: data.markC,
     },
   };
   return (

@@ -4,7 +4,6 @@ const opt = [
   {
     id: "Cumulative",
   },
-  { id: "Batch average" },
   { id: "Week performance" },
   { id: "Weekly with Average" },
 ];
@@ -31,7 +30,7 @@ export default function AutoComplete({ selected, setSelected }) {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a skill"
+          label="Choose a metrics"
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill

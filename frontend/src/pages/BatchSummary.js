@@ -2,13 +2,13 @@ import { Box, Slider, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { data } from "../components/chart/data";
 import SingleRadarPlot from "../components/chart/SingleRadarPlot";
+import TableView from "../components/chart/TableView";
 
-console.log(data);
 const weekSummary = [];
 data.forEach((d) => {
   weekSummary.push({ week: d.week, week_summary: d.week_summay });
 });
-console.log(weekSummary);
+
 const marks = [];
 
 for (let i = 0; i <= weekSummary.length - 1; i++) {
@@ -17,7 +17,7 @@ for (let i = 0; i <= weekSummary.length - 1; i++) {
     label: `Week ${weekSummary[i].week.slice(-1)}`,
   });
 }
-console.log(marks);
+
 function valuetext(value) {
   return `Week ${value}`;
 }
@@ -33,7 +33,10 @@ export default function BatchSummary() {
   const colors = [];
   const series2 = [];
 
-  console.log(weekSummary[week]);
+  const summary_week_competency = {
+    week: data[week].week,
+    week_comp: data[week].summary_week_competency,
+  };
 
   weekSummary[week].week_summary.forEach((comp) => {
     for (let key in comp) {
@@ -56,14 +59,14 @@ export default function BatchSummary() {
     series,
     colors,
     series2,
-    fillColors: [],
+    fillColors: ["#1A73E8", "#B32824"],
   };
   console.log(categories, series, colors, series2);
 
   const onChanged = (e, value) => {
     setWeek(value);
   };
-  let max;
+
   const chartDatas = {
     series: [
       { name: "Week Comp", data: chartData.series },
@@ -107,7 +110,7 @@ export default function BatchSummary() {
           max={data.length - 1}
         />
       </Box>
-      <h1>Table</h1>
+      <TableView data={summary_week_competency} />
     </>
   );
 }
