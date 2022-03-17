@@ -17,6 +17,7 @@ import generateColor from "../utils/color";
 import AutoComplete from "./AutoComplete";
 import { data } from "./chart/data";
 import SingleRadarPlot from "./chart/SingleRadarPlot";
+import Feedback from "./Feedback";
 
 const abrhamComp = [];
 data.forEach((d) => {
@@ -120,8 +121,8 @@ export default function RadarChart() {
     markColor.push({
       seriesIndex: 0,
       dataPointIndex: index,
-      fillColor: generateColor("#004c6d", "#c1e7ff", output),
-      size: 4,
+      fillColor: generateColor("#c1e7ff", "#004c6d", output),
+      size: 3,
     });
   });
   console.log("markColor", markColor);
@@ -134,11 +135,10 @@ export default function RadarChart() {
     fillColors,
     markColor,
   };
-  // console.log(categories, series, colors, average);
 
   const indexofPerformingatRisk = [];
   weekValue.forEach((value, index) => {
-    if (value <= average[index]) {
+    if (value <= average[index] - 5) {
       indexofPerformingatRisk.push(index);
     }
   });
@@ -146,6 +146,17 @@ export default function RadarChart() {
   const PerformingatRiskCompetencies = [];
   indexofPerformingatRisk.forEach((value) => {
     PerformingatRiskCompetencies.push(categories[value]);
+  });
+  const indexofPerformingWell = [];
+  weekValue.forEach((value, index) => {
+    if (value >= average[index] + 10) {
+      indexofPerformingWell.push(index);
+    }
+  });
+
+  const PerformingWellCompetencies = [];
+  indexofPerformingWell.forEach((value) => {
+    PerformingWellCompetencies.push(categories[value]);
   });
   const onChanged = (e, value) => {
     setWeek(value);
@@ -167,7 +178,7 @@ export default function RadarChart() {
       { name: "Batch average", data: chartData.average },
     ];
     max = 1;
-    markC = chartData.markColor;
+    markC = [];
   }
   const chartDatas = {
     series: seriesData,
@@ -177,6 +188,9 @@ export default function RadarChart() {
     max: max,
     markC: markC,
   };
+
+  const [showRisk, setShowRisk] = useState(false);
+  const [showWell, setShowWell] = useState(false);
 
   return (
     <>
@@ -190,12 +204,10 @@ export default function RadarChart() {
           <AutoComplete selected={selected} setSelected={setSelected} />
         </Grid>
       </Grid>
-
       <Typography>
         Radar chart for week {data[week].week.slice(-1)} competency
       </Typography>
       <SingleRadarPlot data={chartDatas} />
-
       <Box
         component="div"
         sx={{
@@ -225,10 +237,13 @@ export default function RadarChart() {
           <Card>
             <CardContent>
               <Typography variant="h5">
-                Competencies Performing at Risk
+                <button onClick={() => setShowRisk((prev) => !prev)}>
+                  {" "}
+                  Competencies Performing at Risk
+                </button>
                 <Tooltip
                   style={{ color: "red" }}
-                  title="List of Competencies performed below the average of the batch"
+                  title="List of Competencies performed 5 points below the average of the batch"
                   placement="right-start"
                 >
                   <Button>
@@ -236,17 +251,50 @@ export default function RadarChart() {
                   </Button>
                 </Tooltip>
               </Typography>
-              <List>
-                {PerformingatRiskCompetencies.map((value) => (
-                  <ListItem key={value}>
-                    <ListItemText primary={value} />
-                  </ListItem>
-                ))}
-              </List>
+              {showRisk && (
+                <List>
+                  {PerformingatRiskCompetencies.map((value) => (
+                    <ListItem key={value}>
+                      <ListItemText primary={value} />
+                    </ListItem>
+                  ))}
+                </List>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Card>
+            <CardContent>
+              <Typography variant="h5">
+                <button onClick={() => setShowWell((prev) => !prev)}>
+                  {" "}
+                  Competencies Performing Well
+                </button>
+                <Tooltip
+                  style={{ color: "green" }}
+                  title="List of Competencies performed above 10 points the average of the batch"
+                  placement="right-start"
+                >
+                  <Button>
+                    <InfoOutlinedIcon />
+                  </Button>
+                </Tooltip>
+              </Typography>
+              {showWell && (
+                <List>
+                  {PerformingWellCompetencies.map((value) => (
+                    <ListItem key={value}>
+                      <ListItemText primary={value} />
+                    </ListItem>
+                  ))}
+                </List>
+              )}
             </CardContent>
           </Card>
         </Grid>
       </Grid>
+      <Feedback />
     </>
   );
 }

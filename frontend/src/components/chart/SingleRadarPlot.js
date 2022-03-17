@@ -42,12 +42,26 @@ export default function SingleRadarPlot({ data }) {
       max: 100 * data.max,
     },
     fill: {
-      opacity: 0.5,
+      opacity: 0.7,
       type: "solid",
       colors: data.fillColors,
     },
     markers: {
+      size: 3,
       discrete: data.markC,
+    },
+    stroke: {
+      show: false,
+    },
+    plotOptions: {
+      radar: {
+        polygons: {
+          strokeColor: "#2F4F4F",
+          fill: {
+            colors: ["#f8f8f8", "#fff"],
+          },
+        },
+      },
     },
   };
   return (
